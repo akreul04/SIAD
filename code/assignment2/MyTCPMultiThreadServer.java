@@ -58,9 +58,6 @@ class TCPServerThread extends Thread {
 			receivedData += inputLine + "\n";
 
 			
-			
-			
-			
 		}
 
 		System.out.println("Data received from client:" + receivedData);
