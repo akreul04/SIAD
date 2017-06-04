@@ -25,22 +25,25 @@ public class MyTCPClient{
 		//BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		//buffer reade to read from user input
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-		new TCPClientThread(socket).start();
-	
+		
 		System.out.println("Please enter a user name: ");
 		userName = stdIn.readLine();
-		out.println(userName + " has connected");
+		out.println(userName); //send username to server
+		new TCPClientThread(socket).start();
+	
+		
 		
 
 		while ((userInput = stdIn.readLine()) != null){
-			out.println(userName + " says: " + userInput);
+			out.println(userInput);
 
-			if(userInput.equals("Get User List")){
-				
-			}
+			//if(userInput.equals("Get Users")){
+				//out.println("Get Users");
+			//}
 			
 
 			if(userInput.equals("Exit")){
+				//out.println("Exit");
 				socket.close();
 				System.exit(1);
 			}
