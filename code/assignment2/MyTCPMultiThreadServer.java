@@ -103,17 +103,13 @@ class TCPServerThread extends Thread {
 			if(inputLine.equals("*Get Users")){
 				out.println(MyTCPMultiThreadServer.getUsers());
 				inputLine = in.readLine();
-				//receivedData += inputLine + "\n";
 			}else if(inputLine.equals("*Exit")){
 				MyTCPMultiThreadServer.Exit(this);
 				break;
 			}else{
 				MyTCPMultiThreadServer.sendMessage(inputLine, this);
-
-				
-			
 				inputLine = in.readLine();
-				//receivedData += inputLine + "\n";
+				
 			}
 			
 		}
