@@ -75,6 +75,7 @@ public class MyTCPMultiThreadServer{
 		for(TCPServerThread key: clients.keySet()){
 			PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
 			out.println(sender.getUserName() + " has left the chat");
+			//sender.getSocket().close();
 		}
 	}
 }
@@ -108,10 +109,8 @@ class TCPServerThread extends Thread {
 				inputLine = in.readLine();
 				//receivedData += inputLine + "\n";
 			}else if(inputLine.equals("*Exit")){
-				this.clientSocket.close();
 				MyTCPMultiThreadServer.Exit(this);
-				
-				inputLine = in.readLine();
+				break;
 			}else{
 				MyTCPMultiThreadServer.sendMessage(inputLine, this);
 			//if(inputLine.equals("Exit")
