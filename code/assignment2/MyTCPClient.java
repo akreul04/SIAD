@@ -35,7 +35,6 @@ public class MyTCPClient{
 			out.println(userInput);
 			
 			if(userInput.equals("*Exit")){
-				out.println(userInput);
 				socket.close();
 				System.exit(1);
 			}

@@ -64,11 +64,15 @@ public class MyTCPMultiThreadServer{
 		}
 	}
 	
-	public static void Exit(TCPServerThread sender){
-		
+	public static void Exit(TCPServerThread sender) throws IOException {
 		for(TCPServerThread key: clients.keySet()){
 			if(clients.get(key).equals(sender.getUserName()))
 				clients.remove(key);
+		}
+		
+		for(TCPServerThread key: clients.keySet()){
+			PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
+			out.println(sender.getUserName() + " has left the chat");
 		}
 	}
 }
