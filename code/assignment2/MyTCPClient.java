@@ -29,24 +29,29 @@ public class MyTCPClient{
 		System.out.println("Please enter a user name: ");
 		userName = stdIn.readLine();
 		out.println(userName); //send username to server
+		System.out.print("Welcome to the chat!  Menu Options: \n *GetUsers for list of users \n *Exit to exit\n\n");
 		new TCPClientThread(socket).start();
-	
-		
-		
-
 		while ((userInput = stdIn.readLine()) != null){
 			out.println(userInput);
+			
+			if(userInput.equals("*Exit")){
+				out.println(userInput);
+				socket.close();
+				System.exit(1);
+			}
+			
+			//out.println(userInput);
 
 			//if(userInput.equals("Get Users")){
 				//out.println("Get Users");
 			//}
 			
 
-			if(userInput.equals("Exit")){
-				//out.println("Exit");
+			/*if(userInput.equals("Exit")){
+				//out.println(userInput);
 				socket.close();
 				System.exit(1);
-			}
+			}*/
 			
 		}
 
