@@ -7,21 +7,19 @@ import java.util.HashMap;
 
 
 public class MyTCPMultiThreadServer{
-	//static String users = "";
+
 	static HashMap<TCPServerThread, String> clients = new HashMap<TCPServerThread, String>();
-	//static String username="";
+	
 	public static void main(String[] args) throws IOException {
 		System.out.println("MyTCPServer");
 		int portNumber = 8000;
 		String username;
-		//HashMap<TCPServerThread, String> clients = new HashMap<TCPServerThread, String>();
 		ServerSocket serverSocket  = new ServerSocket(portNumber); //this line is equivalent to socket, bind and listen in C
 		System.out.println("MyTCPServer is running on port " + serverSocket.getLocalPort());
 
 		while(true){ //keep server running continously
 			Socket clientSocket = serverSocket.accept(); //start accepting client connections, blocking until a client connects
 			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //create reader to read from client socket for username
-			//PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 			username = in.readLine(); //recieve user name from client
 			System.out.println(username + " has connected");
 			
@@ -31,11 +29,12 @@ public class MyTCPMultiThreadServer{
 			clients.put(tcpThread, username); //store hashmap of client threads and usernames
 
 			tcpThread.start();
-			for(TCPServerThread key: clients.keySet()){
-				PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
-				out.println(username + " has connected");
+			
+				for(TCPServerThread key: clients.keySet()){
+					PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
+					out.println(username + " has connected");
 	
-			}
+				}
 			
 			
 
@@ -75,7 +74,6 @@ public class MyTCPMultiThreadServer{
 		for(TCPServerThread key: clients.keySet()){
 			PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
 			out.println(sender.getUserName() + " has left the chat");
-			//sender.getSocket().close();
 		}
 	}
 }
@@ -97,9 +95,7 @@ class TCPServerThread extends Thread {
 		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 		String inputLine = in.readLine();
 		String receivedData = inputLine;
-		//userName = inputLine;
 
-		//System.out.println(userName);
 
 		while(true){ //while still receiving data, add to receivedData string
 			System.out.println(inputLine);
@@ -113,23 +109,14 @@ class TCPServerThread extends Thread {
 				break;
 			}else{
 				MyTCPMultiThreadServer.sendMessage(inputLine, this);
-			//if(inputLine.equals("Exit")
+
 				
 			
 				inputLine = in.readLine();
-			//if(inputLine.equals("Users")){
-			//	System.out.println(this.getUserName());
-		//	}
-			//System.out.println(inputLine);
-				receivedData += inputLine + "\n";
+				//receivedData += inputLine + "\n";
 			}
 			
 		}
-
-		//System.out.println("Data received from client:" + receivedData);
-
-		//String response = "MyTCPServer\n" + (new Date()).toString() + "\n" + "You have sent: " + receivedData;
-		//clientSocket.getOutputStream().write(response.getBytes("UTF-8"));
 		}catch(SocketException e){
 			try{
 				MyTCPMultiThreadServer.Exit(this);

@@ -18,12 +18,10 @@ public class MyTCPClient{
 
 		try{
 		Socket socket  = new Socket(hostname, portNumber);
-		//System.out.println("Connected to the server\'" + hostName + "\'at port"
 		
 		//output stream to send data
 		PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-		//BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		//buffer reade to read from user input
+		//buffered reader to read from user input
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 		
 		System.out.println("Please enter a user name: ");
@@ -34,23 +32,10 @@ public class MyTCPClient{
 		while ((userInput = stdIn.readLine()) != null){
 			out.println(userInput);
 			
-			if(userInput.equals("*Exit")){
-				socket.close();
-				System.exit(1);
-			}
-			
-			//out.println(userInput);
-
-			//if(userInput.equals("Get Users")){
-				//out.println("Get Users");
-			//}
-			
-
-			/*if(userInput.equals("Exit")){
-				//out.println(userInput);
-				socket.close();
-				System.exit(1);
-			}*/
+				if(userInput.equals("*Exit")){
+					socket.close();
+					System.exit(1);
+				}
 			
 		}
 
