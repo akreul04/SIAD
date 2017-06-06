@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -23,8 +24,7 @@ public class MyTCPMultiThreadServer{
 			//PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 			username = in.readLine(); //recieve user name from client
 			System.out.println(username + " has connected");
-			//users = users + " " + username;
-			//System.out.println(getUsers());
+			
 			
 			TCPServerThread tcpThread = new TCPServerThread(clientSocket);
 			tcpThread.setUserName(username);
@@ -39,9 +39,7 @@ public class MyTCPMultiThreadServer{
 			
 			
 
-			//if(in.readLine().equals("Get User List")){
-			//	System.out.println(tcpThread.getUserName());
-			//}
+			
 			} 
 			
 
@@ -66,8 +64,12 @@ public class MyTCPMultiThreadServer{
 	
 	public static void Exit(TCPServerThread sender) throws IOException {
 		for(TCPServerThread key: clients.keySet()){
-			if(clients.get(key).equals(sender.getUserName()))
+			
+			if(clients.get(key).equals(sender.getUserName())){
 				clients.remove(key);
+				break;
+			}
+				
 		}
 		
 		for(TCPServerThread key: clients.keySet()){
@@ -106,8 +108,9 @@ class TCPServerThread extends Thread {
 				inputLine = in.readLine();
 				//receivedData += inputLine + "\n";
 			}else if(inputLine.equals("*Exit")){
-				MyTCPMultiThreadServer.Exit(this);
 				this.clientSocket.close();
+				MyTCPMultiThreadServer.Exit(this);
+				
 				inputLine = in.readLine();
 			}else{
 				MyTCPMultiThreadServer.sendMessage(inputLine, this);
@@ -128,9 +131,19 @@ class TCPServerThread extends Thread {
 
 		//String response = "MyTCPServer\n" + (new Date()).toString() + "\n" + "You have sent: " + receivedData;
 		//clientSocket.getOutputStream().write(response.getBytes("UTF-8"));
-		}catch(IOException e){
-			System.out.println(e.getMessage());
+		}catch(SocketException e){
+			try{
+				MyTCPMultiThreadServer.Exit(this);
+				System.out.println("test");
+			}catch (IOException e2){
+				System.out.println(e2.getMessage());
+			}
+		
+		}catch(IOException e3){
+			System.out.println(e3.getMessage());
 		}
+		
+		
 	}
 
 	public Socket getSocket(){
