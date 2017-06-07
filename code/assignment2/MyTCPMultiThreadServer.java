@@ -9,7 +9,6 @@ import java.util.HashMap;
 public class MyTCPMultiThreadServer implements Runnable{
 
 	static HashMap<TCPServerThread, String> clients = new HashMap<TCPServerThread, String>();
-	static int portNumber = 8000;
 	String username;
 	static ServerSocket serverSocket; //this line is equivalent to socket, bind and listen in C
 
