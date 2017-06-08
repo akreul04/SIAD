@@ -58,8 +58,10 @@ public class MyTCPMultiThreadServer implements Runnable{
 	
 	public synchronized String getUsers(){
 		String users = "";
-		for(TCPServerThread key : clients.keySet()){
-			users = users + " " + key.getUserName();
+		synchronized(clients){
+			for(TCPServerThread key : clients.keySet()){
+				users = users + " " + key.getUserName();
+			}
 		}
 		return "Current Users: " + users;
 	}
@@ -74,18 +76,20 @@ public class MyTCPMultiThreadServer implements Runnable{
 	}
 	
 	public synchronized void Exit(TCPServerThread sender) throws IOException {
-		for(TCPServerThread key: clients.keySet()){
+		synchronized(clients){
+			for(TCPServerThread key: clients.keySet()){
 			
-			if(clients.get(key).equals(sender.getUserName())){
-				clients.remove(key);
-				break;
-			}
+				if(clients.get(key).equals(sender.getUserName())){
+					clients.remove(key);
+					break;
+				}
 				
-		}
+			}
 		
-		for(TCPServerThread key: clients.keySet()){
-			PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
-			out.println(sender.getUserName() + " has left the chat");
+			for(TCPServerThread key: clients.keySet()){
+				PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
+				out.println(sender.getUserName() + " has left the chat");
+			}
 		}
 	}
 }
