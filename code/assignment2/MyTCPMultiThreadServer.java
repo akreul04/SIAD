@@ -69,8 +69,8 @@ public class MyTCPMultiThreadServer implements Runnable{
 	public synchronized void sendMessage(String input, TCPServerThread sender) throws IOException {
 		for(TCPServerThread key: clients.keySet()){
 			if(!clients.get(key).equals(sender.getUserName())){
-				PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
-				out.println(sender.getUserName() + " says: " + input);
+				//PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
+				key.send(sender.getUserName() + " says: " + input);
 			}
 		}
 	}
@@ -87,8 +87,8 @@ public class MyTCPMultiThreadServer implements Runnable{
 			}
 		
 			for(TCPServerThread key: clients.keySet()){
-				PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
-				out.println(sender.getUserName() + " has left the chat");
+				//PrintWriter out = new PrintWriter(key.getSocket().getOutputStream(), true);
+				key.send(sender.getUserName() + " has left the chat");
 			}
 		}
 	}
@@ -100,17 +100,19 @@ class TCPServerThread extends Thread {
 	private Socket clientSocket = null;
 	private String username = "";
 	private MyTCPMultiThreadServer server;
+	private PrintWriter out;
 
-	TCPServerThread(MyTCPMultiThreadServer server, Socket clientSocket){
+	TCPServerThread(MyTCPMultiThreadServer server, Socket clientSocket) throws IOException{
 		super("TCPServerThread");
 		this.clientSocket = clientSocket;
 		this.server = server;
+		this.out = new PrintWriter(clientSocket.getOutputStream(), true);
 	}
 
 	public void run(){
 		try{
 			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+			//PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 			String inputLine = in.readLine();
 			String receivedData = inputLine;
 
@@ -156,5 +158,9 @@ class TCPServerThread extends Thread {
 	
 	public String getUserName(){
 		return username;
+	}
+	
+	public void send(String input){ //create send method so I don't have to create output stream with each send
+		out.println(input);
 	}
 }
