@@ -1,0 +1,22 @@
+
+<?php
+	$mysqli = new mysqli('localhost', 'SIAD_lab7', 'secretpass', 'SIAD_lab7');
+	if($mysqli->connect_error){
+		die('Connection to the database terminated with error: ' . $mysqli->connect_error);
+	}
+
+	$sql = "SELECT * FROM users;";
+	$result = $mysqli->query($sql); 
+	if($result ->num_rows > 0){
+		while($row = $result->fetch_assoc()){
+			echo "username=" . htmlentities($row['username']) . ", password =" . htmlentities($row['password']) . "<br>";
+		}
+		return TRUE;
+	}else{
+		echo "No post yet";
+	}
+
+	
+?>
+
+

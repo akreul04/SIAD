@@ -1,0 +1,15 @@
+
+<html>
+	<h1>Login</h1>
+<?php
+	//some code here
+	echo "Current time: " . date("Y-m-d h:i:sa");
+?>
+		<form action="index.php" method="POST" class="form login">
+			Username:<input type="text" name="username" /> <br>
+			Password: <input type="password" name="password" /> <br>
+			<button class="button" type="submit">
+				Login
+			</button>
+		</form>
+</html>
