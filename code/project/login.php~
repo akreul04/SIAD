@@ -1,6 +1,6 @@
 
 <html>
-	<h1>Adam's Fancy Blog</h1>
+	<h1>Adam's Fancy Blog - Login</h1>
 <?php
 	//some code here
 	echo "Current time: " . date("Y-m-d h:i:sa");

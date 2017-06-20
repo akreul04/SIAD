@@ -13,11 +13,11 @@
 			$postid = $row["postid"];
 			echo "<h3>Post " .$postid. "-" .$row["title"]. "</h3><br>";
 			echo $row["content"]."<br>";
-			echo "<a href='newcommentform.php?postid=$postid'>;";
+			echo "<a href='newcommentform.php?postid=$postid'>";
 			$sql = "SELECT * FROM comments WHERE postid=$postid;";
 			$comments = $mysqli->query($sql);
 			if($comments->num_rows>0){
-				echo $comments->num_rows. "comments </a>";
+				echo $comments->num_rows. " comments </a>";
 			}else{
 				echo "Post your first comment </a>";
 			}
@@ -28,7 +28,9 @@
 
 ?>
 
-	
+<br>
+<br>
+<a href='admin.php'>Admin Login</a>	
 
 	
 

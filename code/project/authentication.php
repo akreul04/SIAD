@@ -1,7 +1,7 @@
 
 <?php
-	//session_set_cookie_params(1200);
-	//session_start();
+	session_set_cookie_params(1200);
+	session_start();
 	$mysqli = new mysqli('localhost', 'SIAD_project', 'secretpass', 'SIAD_project');
 	if($mysqli->connect_error){
 		die('Connection to the database terminated with error: ' . $mysqli->connect_error);
@@ -10,7 +10,7 @@
 	function checklogin($username, $password){
 		$sql = "SELECT * FROM users WHERE username = '$username' AND password = password('$password');";
 		//just debug
-		echo "sql = $sql";
+		//echo "sql = $sql";
 		global $mysqli;
 		$result = $mysqli->query($sql);
 
@@ -23,7 +23,7 @@
 
 //move this to new index.php, add require authenticiation.php
 
-	echo "Index page<br>\n";
+	//echo "Index page<br>\n";
 	//store a login session in $_SESSION["logged"]
 
 		//header("refresh: 1; url = login.php");

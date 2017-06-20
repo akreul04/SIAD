@@ -3,11 +3,11 @@
 	<h1>Add a new user</h1>
 <?php
 	//some code here
-	//require "authentication.php";
+	require "authentication.php";
 	echo "Current time: " . date("Y-m-d h:i:sa");
 	$rand = bin2hex(openssl_random_pseudo_bytes(16));
 	//echo "\$rand = $rand";
-	$_SESSION["fucsrf"] = $rand;
+	$_SESSION["nocsrf"] = $rand;
 ?>
 		<form action="newuser.php" method="POST" class="form login">
 			<input type="hidden" name="secrettoken" value="<?php echo $rand;?>"/>

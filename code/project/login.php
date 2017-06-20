@@ -5,7 +5,7 @@
 	//some code here
 	echo "Current time: " . date("Y-m-d h:i:sa");
 ?>
-		<form action="index.php" method="POST" class="form login">
+		<form action="admin.php" method="POST" class="form admin">
 			Username:<input type="text" required pattern = "\w+" name="username" /> <br>
 			Password: <input type="password" required pattern="(?=.*[A-Z]).{6,}" name="password" /> <br>
 			<button class="button" type="submit">
