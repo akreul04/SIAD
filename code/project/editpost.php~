@@ -1,0 +1,30 @@
+<?php
+	require "authentication.php";
+
+	function updatepost($postid, $title, $content){
+		$sql = "UPDATE posts SET title =  '$title', content = '$content' WHERE postid = $postid;";
+		//just debug
+		echo "sql = $sql";
+		/*global $mysqli;
+		$result = $mysqli->query($sql);
+
+
+		if($result == TRUE){
+			echo "Password for '$username' has been updated";
+		}else
+		{
+			echo "Failed to change for the password for '$username' Error: " .$mysqli->error;
+		}*/
+
+		
+	}
+
+
+	$postid = $_POST['postid'];
+	$title = $_POST["title"];
+	$content = $_POST["content"];
+	if(isset($postid) and isset($title) and isset($content)){
+		updatepost($postid, $title, $content);
+	}
+		
+?>

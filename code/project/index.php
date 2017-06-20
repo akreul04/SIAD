@@ -5,7 +5,10 @@
 	if($mysqli->connect_error){
 		die('Connection to the database terminated with error: ' . $mysqli->connect_error);
 	}
+	
 	$sql = "SELECT * FROM posts";
+	
+
 	$result = $mysqli->query($sql);
 	if($result->num_rows > 0){
 		//output data of each row
