@@ -10,11 +10,13 @@
 	
 
 	$result = $mysqli->query($sql);
+	$num_rows = 0;
 	if($result->num_rows > 0){
 		//output data of each row
 		while($row = $result->fetch_assoc()){
+			$num_rows++;
 			$postid = $row["postid"];
-			echo "<h3>Post " .$postid. "-" .$row["title"]. "</h3><br>";
+			echo "<h3>Post " .$num_rows. "-" .$row["title"]. "</h3><br>";
 			echo $row["content"]."<br>";
 			echo "<a href='newcommentform.php?postid=$postid'>";
 			$sql = "SELECT * FROM comments WHERE postid=$postid;";

@@ -5,19 +5,11 @@
 	if($mysqli->connect_error){
 		die('Connection to the database terminated with error: ' . $mysqli->connect_error);
 	}
-	if ($stmt = $mysqli->prepare("SELECT * FROM posts")){
-		echo "Prepare successful";
-	}
 	
-	if($stmt->execute()){
-		echo "Execute successful";
-	}
-	//$sql = "SELECT * FROM posts";
-	if($result = $stmt->get_result()){
-		echo "Result succcessful";
-	}
+	$sql = "SELECT * FROM posts";
+	
 
-	//$result = $mysqli->query($sql);
+	$result = $mysqli->query($sql);
 	if($result->num_rows > 0){
 		//output data of each row
 		while($row = $result->fetch_assoc()){
