@@ -14,9 +14,14 @@
 	while($row = $contentresult->fetch_assoc()){
 		$content = $row["content"];
 	}
+
+	$rand = bin2hex(openssl_random_pseudo_bytes(16));
+	//echo "\$rand = $rand";
+	$_SESSION["nocsrf"] = $rand;
 	
 ?>
 		<form action="editpost.php" method="POST" class="form login">
+			<input type="hidden" name="secrettoken" value="<?php echo $rand;?>"/>
 			<input type ="hidden" name="postid" value="<?php echo $_GET['postid'];?>"/>
 			Title: <input type="text" name="title" value="<?php echo $title;?>"/> <br>
 			Content: <input type="text" name="content" value="<?php echo $content;?>"  /> <br>

@@ -5,16 +5,16 @@
 		$sql = "UPDATE posts SET title =  '$title', content = '$content' WHERE postid = $postid;";
 		//just debug
 		echo "sql = $sql";
-		/*global $mysqli;
+		global $mysqli;
 		$result = $mysqli->query($sql);
 
 
 		if($result == TRUE){
-			echo "Password for '$username' has been updated";
+			echo "Post '$title' has been updated";
 		}else
 		{
-			echo "Failed to change for the password for '$username' Error: " .$mysqli->error;
-		}*/
+			echo "Failed to update post '$title' Error: " .$mysqli->error;
+		}
 
 		
 	}

@@ -11,8 +11,8 @@
 ?>
 		<form action="newpost.php" method="POST" class="form post">
 			<input type="hidden" name="secrettoken" value="<?php echo $rand;?>"/>
-			Title:<input type="post_title" name="post_title" /> <br>
-			Content: <input type="content" name="content" /> <br>
+			Title:<input type="text" name="post_title" /> <br>
+			Content: <input type="text" name="content" /> <br>
 			<button class="button" type="submit">
 				Add Post
 			</button>

@@ -1,6 +1,13 @@
 <?php
 	require "authentication.php";
 
+	$secrettoken = $_POST["secrettoken"];
+	//echo "nocsrf: " . $_SESSION["nocsrf"];
+	if ( !isset($secrettoken) or ($secrettoken !=  $_SESSION["nocsrf"])){
+		echo "Cross site request forgery is detected.";
+		die();
+	}
+
 	function updatepost($postid, $title, $content){
 		$sql = "UPDATE posts SET title =  '$title', content = '$content' WHERE postid = $postid;";
 		//just debug

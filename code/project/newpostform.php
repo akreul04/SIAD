@@ -7,7 +7,7 @@
 	//echo "Current time: " . date("Y-m-d h:i:sa");
 	$rand = bin2hex(openssl_random_pseudo_bytes(16));
 	//echo "\$rand = $rand";
-	$_SESSION["fucsrf"] = $rand;
+	$_SESSION["nocsrf"] = $rand;
 ?>
 		<form action="newpost.php" method="POST" class="form post">
 			<input type="hidden" name="secrettoken" value="<?php echo $rand;?>"/>

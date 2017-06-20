@@ -7,8 +7,8 @@
 		die();
 	}
 	function addpost($title, $content){
-		$title = mysql_real_escape_string($username);
-		$content = mysql_real_escape_string($password);
+		$title = mysql_real_escape_string($title);
+		$content = mysql_real_escape_string($content);
 		$sql = "INSERT INTO posts VALUES (0, 2, '$title', '$content', NOW());";
 		//just debug
 		echo "sql = $sql";

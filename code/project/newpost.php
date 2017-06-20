@@ -1,8 +1,7 @@
 <?php
 	require "authentication.php";
 	$secrettoken = $_POST["secrettoken"];
-	//echo "debug> \$secrettoken = $secrettoken <br> \$_SESSION[\"fucsrf\"]=" . $_SESSION["fucsrf"];
-	if ( !isset($secrettoken) or ($secrettoken !=  $_SESSION["fucsrf"]) ){
+	if ( !isset($secrettoken) or ($secrettoken !=  $_SESSION["nocsrf"]) ){
 		echo "Cross site request forgery is detected.";
 		die();
 	}
