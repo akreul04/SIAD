@@ -1,6 +1,12 @@
 <?php
 	require "authentication.php";
 
+	/*$secrettoken = $_POST["secrettoken"];
+	if ( !isset($secrettoken) or ($secrettoken !=  $_SESSION["nocsrf"])){
+		echo "Cross site request forgery is detected.";
+		die();
+	}*/
+
 	function deletepost($postid){
 		
 		$sql = "DELETE FROM posts WHERE postid = $postid;";
@@ -28,3 +34,7 @@
 	}
 		
 ?>
+
+<br>
+<br>
+<a href='index.php'>Home</a>

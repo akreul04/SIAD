@@ -2,21 +2,20 @@
 <html>
 	<h1>Edit post</h1>
 <?php
-	//some code here
+
 	require "authentication.php";
-	$titlesql = "SELECT title FROM posts where postid = " . $_GET['postid'];
-	$contentsql = "SELECT content FROM posts where postid = " . $_GET['postid'];
-	$titleresult = $mysqli->query($titlesql);
-	$contentresult = $mysqli->query($contentsql);
-	while($row = $titleresult->fetch_assoc()){
-		$title = $row["title"];
-	}
-	while($row = $contentresult->fetch_assoc()){
-		$content = $row["content"];
+	$postid = $_GET['postid'];
+	$sql = "SELECT title, content FROM posts where postid = ?";
+	$stmt = $mysqli->stmt_init();
+	if(!$stmt->prepare($sql))   echo "Prepare failed";
+	$stmt->bind_param('i', $postid);
+	if(!$stmt->execute()) echo "Execute failed ";
+	$stmt->bind_result($title, $content);
+	while($stmt->fetch()){
+		
 	}
 
 	$rand = bin2hex(openssl_random_pseudo_bytes(16));
-	//echo "\$rand = $rand";
 	$_SESSION["nocsrf"] = $rand;
 	
 ?>
@@ -29,4 +28,10 @@
 				Update
 			</button>
 		</form>
+
+<br>
+<br>
+<a href='index.php'>Home</a>
 </html>
+
+

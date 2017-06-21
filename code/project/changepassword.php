@@ -8,14 +8,20 @@
 	}
 
 	function changepasswd($username, $password){
-		$sql = "UPDATE users SET password =  password('$password') WHERE username = '$username';";
-		//just debug
-		echo "sql = $sql";
+		$username = mysql_real_escape_string($username);
+		$password = mysql_real_escape_string($password);
+		$sql = "UPDATE users SET password =  password(?) WHERE username = ?;";
+		
+		
 		global $mysqli;
-		$result = $mysqli->query($sql);
+		if(!($stmt = $mysqli->prepare($sql))) echo "Prepare failed";
+		$stmt->bind_param("ss",$password, $username);
+		if(!$stmt->execute()) echo "Execute failed";
+		if(!$stmt->store_result()) echo "Get result failed";
+		
 
 
-		if($result == TRUE){
+		if($stmt == TRUE){
 			echo "Password for '$username' has been updated";
 		}else
 		{
@@ -27,10 +33,13 @@
 
 
 	$username = $_SESSION["username"];
-	$password = $_REQUEST["newpassword"];
-	echo "debug> NewUsername= $username; Newpassword=$password <br>";
+	$password = $_POST["newpassword"];
 	if(isset($username) and isset($password)){
 		changepasswd($username, $password);
 	}
 		
 ?>
+
+<br>
+<br>
+<a href='index.php'>Home</a>

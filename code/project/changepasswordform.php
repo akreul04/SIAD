@@ -2,11 +2,9 @@
 <html>
 	<h1>Change password</h1>
 <?php
-	//some code here
+	
 	require "authentication.php";
-	echo "Current time: " . date("Y-m-d h:i:sa");
 	$rand = bin2hex(openssl_random_pseudo_bytes(16));
-	//echo "\$rand = $rand";
 	$_SESSION["nocsrf"] = $rand;
 ?>
 		<form action="changepassword.php" method="POST" class="form login">
@@ -18,4 +16,8 @@
 				Change password
 			</button>
 		</form>
+
+<br>
+<br>
+<a href='index.php'>Home</a>
 </html>

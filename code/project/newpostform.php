@@ -2,11 +2,8 @@
 <html>
 	<h1>Add a new post</h1>
 <?php
-	//some code here
 	require "authentication.php";
-	//echo "Current time: " . date("Y-m-d h:i:sa");
 	$rand = bin2hex(openssl_random_pseudo_bytes(16));
-	//echo "\$rand = $rand";
 	$_SESSION["nocsrf"] = $rand;
 ?>
 		<form action="newpost.php" method="POST" class="form post">
@@ -17,4 +14,8 @@
 				Add Post
 			</button>
 		</form>
+
+<br>
+<br>
+<a href='index.php'>Home</a>
 </html>

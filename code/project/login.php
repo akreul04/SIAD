@@ -12,4 +12,8 @@
 				Login
 			</button>
 		</form>
+
+<br>
+<br>
+<a href='index.php'>Home</a>
 </html>

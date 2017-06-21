@@ -2,21 +2,24 @@
 	require "authentication.php";
 
 	$secrettoken = $_POST["secrettoken"];
-	//echo "nocsrf: " . $_SESSION["nocsrf"];
 	if ( !isset($secrettoken) or ($secrettoken !=  $_SESSION["nocsrf"])){
 		echo "Cross site request forgery is detected.";
 		die();
 	}
 
 	function updatepost($postid, $title, $content){
-		$sql = "UPDATE posts SET title =  '$title', content = '$content' WHERE postid = $postid;";
-		//just debug
-		echo "sql = $sql";
+		$postid = mysql_real_escape_string($postid);
+		$title = mysql_real_escape_string($title);
+		$content = mysql_real_escape_string($content);
+		$sql = "UPDATE posts SET title =  ?, content = ? WHERE postid = ?;";
 		global $mysqli;
-		$result = $mysqli->query($sql);
+		if(!($stmt = $mysqli->prepare($sql))) echo "Prepare failed";
+		$stmt->bind_param("ssi",$title,$content,$postid);
+		if(!$stmt->execute())   echo "Execute failed";
+		//$result = $mysqli->query($sql);
 
 
-		if($result == TRUE){
+		if($stmt == TRUE){
 			echo "Post '$title' has been updated";
 		}else
 		{
@@ -35,3 +38,7 @@
 	}
 		
 ?>
+
+<br>
+<br>
+<a href='index.php'>Home</a>

@@ -8,39 +8,28 @@
 	}
 
 	function checklogin($username, $password){
-		$sql = "SELECT * FROM users WHERE username = '$username' AND password = password('$password');";
-		//just debug
-		//echo "sql = $sql";
+		$sql = "SELECT * FROM users WHERE username = ? AND password = password(?);";
 		global $mysqli;
-		$result = $mysqli->query($sql);
+		if(!($stmt = $mysqli->prepare($sql))) echo "Prepare failed";
+		$stmt->bind_param("ss",$username,$password);
+		if(!$stmt->execute())   echo "Execute failed";
+		if(!$stmt->store_result()) echo "Get result failed";
 
-
-		if($result ->num_rows == 1){
-			return TRUE;
-		}
-		return FALSE;
+		if($stmt->num_rows == 1 ){
+                        return TRUE;
+                }
+                return FALSE;
 	}
 
-//move this to new index.php, add require authenticiation.php
-
-	//echo "Index page<br>\n";
-	//store a login session in $_SESSION["logged"]
-
-		//header("refresh: 1; url = login.php");
-		//echo "You have not logged in<br>";  
-		//echo "debug> Username = $username; password=$password";
-	if(isset($_REQUEST["username"]) and isset($_REQUEST["username"])){
-			$username = mysql_real_escape_string($_REQUEST["username"]);
-			$password = mysql_real_escape_string($_REQUEST["password"]);
+	if(isset($_POST["username"]) and isset($_POST["username"])){
+			$username = mysql_real_escape_string($_POST["username"]);
+			$password = mysql_real_escape_string($_POST["password"]);
 		
 		if(checklogin($username, $password)){
 			echo "Valid username and password! Welcome! <br>";
 			$_SESSION["logged"] = TRUE;
 			$_SESSION["username"] = $username;
 			//$_SESSION["browser"] = $_SERVER["HTTP_USER_AGENT"];
-			//$_SESSION["browser2"] = $_SERVER["REMOTE_ADDR"];
-			//$_SESSION["browser3"] = $_SERVER["HTTP_ACCEPT"];
-			//echo "DEBUG \$_SESSION[\"browser\"] = " . $_SESSION["browser"];
 		}else{
 			header("refresh: 1; url = login.php");
 			echo "Invalid username or password";
@@ -58,17 +47,8 @@
 	/*if ( $_SESSION["browser"] != $_SERVER["HTTP_USER_AGENT"]){
 		echo "Session hijacking is detected";
 		die();
-	}
-
-	if ( $_SESSION["browser2"] != $_SERVER["REMOTE_ADDR"]){
-		echo "Session hijacking is detected";
-		die();
-	}
-
-	if ( $_SESSION["browser3"] != $_SERVER["HTTP_ACCEPT"]){
-		echo "Session hijacking is detected";
-		die();
 	}*/
+
 ?>
 
 

@@ -8,14 +8,15 @@
 	function adduser($username, $password){
 		$username = mysql_real_escape_string($username);
 		$password = mysql_real_escape_string($password);
-		$sql = "INSERT INTO users VALUES (0, '$username', password('$password'));";
-		//just debug
-		echo "sql = $sql";
+		$sql = "INSERT INTO users VALUES (0, ?, password(?));";
 		global $mysqli;
-		$result = $mysqli->query($sql);
+		$stmt = $mysqli->stmt_init();
+		if(!$stmt->prepare($sql))   echo "Prepare failed";
+		$stmt->bind_param("ss", $username, $password);
+		if(!$stmt->execute()) echo "Execute failed ";
 
 
-		if($result == TRUE){
+		if($stmt == TRUE){
 			echo "New username '$username' has been added";
 		}else
 		{
@@ -28,9 +29,12 @@
 
 	$username = $_POST["newusername"];
 	$password = $_POST["newpassword"];
-	echo "debug> NewUsername= $username; Newpassword=$password <br>";
 	if(isset($username) and isset($password)){
 		adduser($username, $password);
 	}
 		
 ?>
+
+<br>
+<br>
+<a href='index.php'>Home</a>
