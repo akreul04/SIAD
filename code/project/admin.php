@@ -1,5 +1,4 @@
 <html>
-
 <?php
 	require "authentication.php";
 
@@ -25,10 +24,8 @@
 			echo "<h3>Post " .$num_rows. "-" .htmlentities($title). "</h3><br>";
 			echo htmlentities($content)."<br>";
 			echo "<a href='editpostform.php?postid=$postid'>Edit</a>";
-			?>
-			<html> <br> </html>
-			<?php 
-			echo "<a href='deletepost.php?postid=$postid'>Delete</a>";
+			echo "<br>";
+			echo "<a href='deletepostform.php?postid=$postid'>Delete</a>";
 		}
 	
 	if($num_rows == 0)
@@ -36,9 +33,7 @@
 	
 
 ?>
-<form action="deletepost.php" method="POST" class="form login">
-	<input type="text" name="secrettoken" value="<?php echo $rand;?>"/>
-</form>
+
 
 <br>
 <br>

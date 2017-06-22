@@ -1,22 +1,26 @@
 <?php
 	require "authentication.php";
 
-	/*$secrettoken = $_POST["secrettoken"];
+	$secrettoken = $_POST["secrettoken"];
 	if ( !isset($secrettoken) or ($secrettoken !=  $_SESSION["nocsrf"])){
 		echo "Cross site request forgery is detected.";
 		die();
-	}*/
+	}
 
 	function deletepost($postid){
+		$postid = mysql_real_escape_string($postid);
 		
-		$sql = "DELETE FROM posts WHERE postid = $postid;";
+		$sql = "DELETE FROM posts WHERE postid = ?;";
 		//just debug
-		echo "sql = $sql";
+		//echo "sql = $sql";
 		global $mysqli;
-		$result = $mysqli->query($sql);
+		if(!($stmt = $mysqli->prepare($sql))) echo "Prepare failed";
+		$stmt->bind_param("i",$postid);
+		if(!$stmt->execute()) echo "Execute failed";
+		//$result = $mysqli->query($sql);
 
 
-		if($result == TRUE){
+		if($stmt == TRUE){
 			echo "Post deleted";
 		}else
 		{
@@ -27,8 +31,7 @@
 	}
 
 
-	$postid = $_GET['postid'];
-	echo "postid = $postid";
+	$postid = htmlspecialchars($_POST['postid']);
 	if(isset($postid)){
 		deletepost($postid);
 	}

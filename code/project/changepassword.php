@@ -32,8 +32,8 @@
 	}
 
 
-	$username = $_SESSION["username"];
-	$password = $_POST["newpassword"];
+	$username = htmlspecialchars($_SESSION["username"]);
+	$password = htmlspecialchars($_POST["newpassword"]);
 	if(isset($username) and isset($password)){
 		changepasswd($username, $password);
 	}

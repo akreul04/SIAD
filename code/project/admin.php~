@@ -1,5 +1,4 @@
 <html>
-
 <?php
 	require "authentication.php";
 
@@ -22,12 +21,10 @@
 	$num_rows = 0;
 		while($stmt ->fetch()){
 			$num_rows++;
-			echo "<h3>Post " .$num_rows. "-" .$title. "</h3><br>";
-			echo $content."<br>";
+			echo "<h3>Post " .$num_rows. "-" .htmlentities($title). "</h3><br>";
+			echo htmlentities($content)."<br>";
 			echo "<a href='editpostform.php?postid=$postid'>Edit</a>";
-			?>
-			<html> <br> </html>
-			<?php 
+			echo "<br>";
 			echo "<a href='deletepost.php?postid=$postid'>Delete</a>";
 		}
 	
@@ -36,9 +33,7 @@
 	
 
 ?>
-<form action="deletepost.php" method="POST" class="form login">
-	<input type="text" name="secrettoken" value="<?php echo $rand;?>"/>
-</form>
+
 
 <br>
 <br>

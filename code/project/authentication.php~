@@ -21,14 +21,6 @@
                 return FALSE;
 	}
 
-//move this to new index.php, add require authenticiation.php
-
-	//echo "Index page<br>\n";
-	//store a login session in $_SESSION["logged"]
-
-		//header("refresh: 1; url = login.php");
-		//echo "You have not logged in<br>";  
-		//echo "debug> Username = $username; password=$password";
 	if(isset($_POST["username"]) and isset($_POST["username"])){
 			$username = mysql_real_escape_string($_POST["username"]);
 			$password = mysql_real_escape_string($_POST["password"]);
@@ -37,7 +29,7 @@
 			echo "Valid username and password! Welcome! <br>";
 			$_SESSION["logged"] = TRUE;
 			$_SESSION["username"] = $username;
-			//$_SESSION["browser"] = $_SERVER["HTTP_USER_AGENT"];
+			$_SESSION["browser"] = $_SERVER["HTTP_USER_AGENT"];
 		}else{
 			header("refresh: 1; url = login.php");
 			echo "Invalid username or password";
@@ -52,10 +44,10 @@
 		
 	}
 
-	/*if ( $_SESSION["browser"] != $_SERVER["HTTP_USER_AGENT"]){
+	if ( $_SESSION["browser"] != $_SERVER["HTTP_USER_AGENT"]){
 		echo "Session hijacking is detected";
 		die();
-	}*/
+	}
 
 ?>
 

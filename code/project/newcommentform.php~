@@ -7,7 +7,7 @@
 	if($mysqli->connect_error){
 		die('Connection to the database terminated with error: ' . $mysqli->connect_error);
 	}
-	$sql = "SELECT username, content FROM comments INNER JOIN users on comments.userid = users.id where postid = " . $_GET['postid'];
+	$sql = "SELECT username, content FROM comments INNER JOIN users on comments.userid = users.userid where postid = " . $_GET['postid'];
 	$stmt = $mysqli->stmt_init();
 	if(!$stmt->prepare($sql)){
 		echo "Prepare failed";

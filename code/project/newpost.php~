@@ -8,7 +8,6 @@
 
 	function addpost($title, $content){
 		$username = $_SESSION["username"];
-		echo "username = $username";
 		$sql = "SELECT userid FROM users WHERE username=?";
 		global $mysqli;
 		$stmt = $mysqli->stmt_init();

@@ -1,4 +1,6 @@
 <html>
+
+	<h1>Welcome to Adam's Fancy SIAD Blog</h1>
 <?php
 	session_start();
 	$mysqli = new mysqli('localhost', 'SIAD_project', 'secretpass', 'SIAD_project');
@@ -24,7 +26,7 @@
 			if($comments->num_rows>0){
 				echo $comments->num_rows. " comments </a>";
 			}else{
-				echo "Post your first comment </a>";
+				echo "Post the first comment </a>";
 			}
 		}
 	}else{

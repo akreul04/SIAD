@@ -1,4 +1,6 @@
 <html>
+
+	<h1>Welcome to Adam's Fancy SIAD Blog</h1>
 <?php
 	session_start();
 	$mysqli = new mysqli('localhost', 'SIAD_project', 'secretpass', 'SIAD_project');
@@ -10,11 +12,13 @@
 	
 
 	$result = $mysqli->query($sql);
+	$num_rows = 0;
 	if($result->num_rows > 0){
 		//output data of each row
 		while($row = $result->fetch_assoc()){
+			$num_rows++;
 			$postid = $row["postid"];
-			echo "<h3>Post " .$postid. "-" .$row["title"]. "</h3><br>";
+			echo "<h3>Post " .$num_rows. "-" .$row["title"]. "</h3><br>";
 			echo $row["content"]."<br>";
 			echo "<a href='newcommentform.php?postid=$postid'>";
 			$sql = "SELECT * FROM comments WHERE postid=$postid;";

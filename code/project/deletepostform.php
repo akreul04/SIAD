@@ -1,10 +1,10 @@
 
 <html>
-	<h1>Edit post</h1>
+	<h1>Delete post</h1>
 <?php
 
 	require "authentication.php";
-	$postid = $_GET['postid'];
+	$postid = htmlentities($_GET['postid']);
 	$sql = "SELECT title, content FROM posts where postid = ?";
 	$stmt = $mysqli->stmt_init();
 	if(!$stmt->prepare($sql))   echo "Prepare failed";
@@ -19,13 +19,13 @@
 	$_SESSION["nocsrf"] = $rand;
 	
 ?>
-		<form action="editpost.php" method="POST" class="form login">
+		<form action="deletepost.php" method="POST" class="form login">
 			<input type="hidden" name="secrettoken" value="<?php echo $rand;?>"/>
 			<input type ="hidden" name="postid" value="<?php echo $_GET['postid'];?>"/>
-			Title: <input type="text" name="title" value="<?php echo $title;?>"/> <br>
-			Content: <input type="text" name="content" value="<?php echo $content;?>"  /> <br>
+			Title: <input type="text" name="title" disabled value="<?php echo $title;?>"/> <br>
+			Content: <input type="text" name="content" disabled value="<?php echo $content;?>"  /> <br>
 			<button class="button" type="submit">
-				Update
+				Delete
 			</button>
 		</form>
 

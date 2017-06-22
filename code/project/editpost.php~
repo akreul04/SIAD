@@ -8,12 +8,18 @@
 	}
 
 	function updatepost($postid, $title, $content){
-		$sql = "UPDATE posts SET title =  '$title', content = '$content' WHERE postid = $postid;";
+		$postid = mysql_real_escape_string($postid);
+		$title = mysql_real_escape_string($title);
+		$content = mysql_real_escape_string($content);
+		$sql = "UPDATE posts SET title =  ?, content = ? WHERE postid = ?;";
 		global $mysqli;
-		$result = $mysqli->query($sql);
+		if(!($stmt = $mysqli->prepare($sql))) echo "Prepare failed";
+		$stmt->bind_param("ssi",$title,$content,$postid);
+		if(!$stmt->execute())   echo "Execute failed";
+		//$result = $mysqli->query($sql);
 
 
-		if($result == TRUE){
+		if($stmt == TRUE){
 			echo "Post '$title' has been updated";
 		}else
 		{

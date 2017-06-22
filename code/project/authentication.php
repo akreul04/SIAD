@@ -29,7 +29,7 @@
 			echo "Valid username and password! Welcome! <br>";
 			$_SESSION["logged"] = TRUE;
 			$_SESSION["username"] = $username;
-			//$_SESSION["browser"] = $_SERVER["HTTP_USER_AGENT"];
+			$_SESSION["browser"] = $_SERVER["HTTP_USER_AGENT"];
 		}else{
 			header("refresh: 1; url = login.php");
 			echo "Invalid username or password";
@@ -44,10 +44,9 @@
 		
 	}
 
-	/*if ( $_SESSION["browser"] != $_SERVER["HTTP_USER_AGENT"]){
-		echo "Session hijacking is detected";
+	if ( $_SESSION["browser"] != $_SERVER["HTTP_USER_AGENT"]){
 		die();
-	}*/
+	}
 
 ?>
 

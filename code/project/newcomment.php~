@@ -13,7 +13,7 @@
 	}
 
 	function addcomment($postid, $comment){
-		if(isset($_SESSION["username"]){
+		if(isset($_SESSION["logged"])){
 			$username = $_SESSION["username"];
 			$sql = "SELECT userid FROM users WHERE username=?";
 			global $mysqli;

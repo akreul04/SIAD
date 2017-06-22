@@ -4,7 +4,7 @@
 <?php
 
 	require "authentication.php";
-	$postid = $_GET['postid'];
+	$postid = htmlentities($_GET['postid']);
 	$sql = "SELECT title, content FROM posts where postid = ?";
 	$stmt = $mysqli->stmt_init();
 	if(!$stmt->prepare($sql))   echo "Prepare failed";

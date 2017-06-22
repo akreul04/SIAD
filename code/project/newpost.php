@@ -39,8 +39,8 @@
 	}
 
 
-	$title = $_POST["post_title"];
-	$content = $_POST["content"];
+	$title = htmlspecialchars($_POST["post_title"]);
+	$content = htmlspecialchars($_POST["content"]);
 	if(isset($title) and isset($content)){
 		addpost($title, $content);
 	}
