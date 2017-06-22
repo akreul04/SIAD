@@ -71,8 +71,8 @@
 
 
 	
-	$comment = $_POST["post_comment"];
-	$postid = $_POST["postid"];
+	$comment = htmlspecialchars($_POST["post_comment"]);
+	$postid = htmlspecialchars($_POST["postid"]);
 	if(isset($postid, $comment)){
 		addcomment($postid, $comment);
 	}

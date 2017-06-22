@@ -29,9 +29,12 @@
 
 	$username = $_POST["newusername"];
 	$password = $_POST["newpassword"];
-	echo "debug> NewUsername= $username; Newpassword=$password <br>";
 	if(isset($username) and isset($password)){
 		adduser($username, $password);
 	}
 		
 ?>
+
+<br>
+<br>
+<a href='index.php'>Home</a>

@@ -30,9 +30,9 @@
 	}
 
 
-	$postid = $_POST['postid'];
-	$title = $_POST["title"];
-	$content = $_POST["content"];
+	$postid = htmlspecialchars($_POST['postid']);
+	$title = htmlspecialchars($_POST["title"]);
+	$content = htmlspecialchars($_POST["content"]);
 	if(isset($postid) and isset($title) and isset($content)){
 		updatepost($postid, $title, $content);
 	}
