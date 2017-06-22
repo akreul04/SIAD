@@ -47,6 +47,9 @@
       </ul><br>
     </div>
 
+<div class="col-sm-9">
+      <h4><small>RECENT POSTS</small></h4>
+
 
 <?php
 	session_start();

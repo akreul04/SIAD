@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Adam's Fancy SIAD Blog</title>
+  <title>Adam's SIAD Blog</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -40,7 +40,7 @@
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav">
-      <h4>Adam's Fancy SIAD Blog</h4>
+      <h4>Adam's SIAD Blog</h4>
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="index.php">Home</a></li>
         <li><a href="admin.php">Admin Login</a></li>
